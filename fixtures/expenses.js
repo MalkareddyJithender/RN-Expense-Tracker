@@ -31,4 +31,28 @@ export const expenses = [
     amount: 52520,
     date: new Date("2023-02-21"),
   },
+  {
+    id: "e6",
+    description: "A Pair of Chairs",
+    amount: 520,
+    date: new Date("2023-02-02"),
+  },
+  {
+    id: "e7",
+    description: "A Book",
+    amount: 400,
+    date: new Date("2022-12-31"),
+  },
+  {
+    id: "e8",
+    description: "D-mart Shopping",
+    amount: 1520,
+    date: new Date("2022-11-01"),
+  },
+  {
+    id: "e9",
+    description: "A Laptop",
+    amount: 52520,
+    date: new Date("2023-02-21"),
+  },
 ];
