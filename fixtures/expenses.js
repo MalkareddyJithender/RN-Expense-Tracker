@@ -47,12 +47,12 @@ export const expenses = [
     id: "e8",
     description: "D-mart Shopping",
     amount: 1520,
-    date: new Date("2023-02-16"),
+    date: new Date("2023-02-26"),
   },
   {
     id: "e9",
     description: "A Laptop",
     amount: 52520,
-    date: new Date("2023-02-10"),
+    date: new Date("2023-02-27"),
   },
 ];

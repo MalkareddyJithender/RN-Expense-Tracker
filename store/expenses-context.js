@@ -1,20 +1,18 @@
 import { createContext, useReducer } from "react";
-import { expenses } from "../fixtures/expenses";
 
 export const ExpensesContext = createContext({
   expenses: [],
   addExpense: () => {},
   deleteExpense: () => {},
   updateExpense: () => {},
+  setExpenses: () => {},
 });
 
 function expensesReducer(state, action) {
   switch (action.type) {
-    case "ADD_EXPENSE": {
-      const id = new Date().getTime();
-      const expense = { id, ...action.payload };
-      return [expense, ...state];
-    }
+    case "ADD_EXPENSE":
+      return [action.payload, ...state];
+
     case "UPDATE_EXPENSE": {
       const expenseId = action.payload.id;
       const expenseIndex = state.findIndex(
@@ -26,17 +24,24 @@ function expensesReducer(state, action) {
       updatedExpenses[expenseIndex] = updatedExpense;
       return updatedExpenses;
     }
+
     case "DELETE_EXPENSE": {
       const id = action.payload;
       return state.filter((expense) => expense.id !== id);
     }
+
+    case "SET_EXPENSES": {
+      const inverse = action.payload.reverse();
+      return inverse;
+    }
+
     default:
       return state;
   }
 }
 
 function ExpensesContextProvider({ children }) {
-  const [expensesData, dispatch] = useReducer(expensesReducer, expenses);
+  const [expensesData, dispatch] = useReducer(expensesReducer, []);
 
   function addExpense(expenseData) {
     dispatch({
@@ -59,12 +64,22 @@ function ExpensesContextProvider({ children }) {
     });
   }
 
+  function setExpenses(expenses) {
+    dispatch({
+      type: "SET_EXPENSES",
+      payload: expenses,
+    });
+  }
+
   const value = {
     expenses: expensesData,
     addExpense,
     deleteExpense,
     updateExpense,
+    setExpenses,
   };
+
+  console.log("Data",value.expenses)
 
   return (
     <ExpensesContext.Provider value={value}>
